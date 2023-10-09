@@ -13,14 +13,12 @@ def Release()
   pod 'RxSwift', '6.2.0' # 响应式
   pod 'RxCocoa', '6.2.0' # 响应式
   pod 'CocoaLumberjack/Swift'
-#  pod 'RxAlamofire'
   pod 'Kingfisher', '7.6.1'
   pod 'RxDataSources'
   pod 'Moya/RxSwift'
   pod 'MBProgressHUD'
   pod 'KMNavigationBarTransition'
   pod "ESTabBarController-swift"
-  
   
 end
 

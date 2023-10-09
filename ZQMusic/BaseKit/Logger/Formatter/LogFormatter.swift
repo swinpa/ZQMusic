@@ -1,6 +1,6 @@
 //
 //  LogFormatter.swift
-//  FZChat
+//  ZQMusic
 //
 //  Created by wupeng on 2021/9/9.
 //

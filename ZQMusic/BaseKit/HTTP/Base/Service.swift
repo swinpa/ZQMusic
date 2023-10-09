@@ -1,8 +1,8 @@
 //
 //  Service.swift
-//  FZChat
+//  ZQMusic
 //
-//  Created by wp on 2023/1/15.
+//  Created by wp on 9/29/23.
 //
 
 import Foundation
@@ -21,7 +21,7 @@ extension TargetType {
 }
 
 
-public protocol FZTargetType: Moya.TargetType {
+public protocol ZQMTargetType: Moya.TargetType {
     /// Request parameters
     var parameters: [String: Any] { get }
     /// Plugin array
@@ -31,7 +31,7 @@ public protocol FZTargetType: Moya.TargetType {
     var timeoutForRequest: TimeInterval { get }
 }
 
-extension FZTargetType {
+extension ZQMTargetType {
     public var baseURL: URL {
         return URL.init(string: "FZGlobal.URL.Host.http")!
     }
@@ -49,7 +49,7 @@ extension FZTargetType {
     }
 }
 
-extension FZTargetType {
+extension ZQMTargetType {
     
     public func request<T:Codable>(callbackQueue: DispatchQueue? = DispatchQueue(label: "zqm.rx.http.queue", qos: .background, attributes: [.concurrent])) -> RxSwift.Observable<T> {
         

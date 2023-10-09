@@ -6,8 +6,15 @@
 //
 
 import Foundation
+import CommonCrypto
+import CryptoKit
 
 extension String {
+    
+    public var md5: String {
+        let computed = Insecure.MD5.hash(data: self.data(using: .utf8)!)
+        return computed.map { String(format: "%02hhx", $0) }.joined()
+    }
     
     /// 计算宽度和高度（核心)
     func size(width: CGFloat, height: CGFloat) -> CGSize {
@@ -110,7 +117,26 @@ extension String {
         return result
     }
 
-    func localized() -> String {
-        return self
+    var localizedValue: String {
+        return NSLocalizedString(self, comment: "")
     }
+    
+    func findKeyForLocalizedString() -> String? {
+        guard let preferredLanguage = Locale.preferredLanguages.first else {
+            return nil
+        }
+        let mainBundle = Bundle.main
+        guard let lprojPath = Bundle.main.path(forResource: preferredLanguage, ofType: "lproj") else {
+            return nil
+        }
+        let filePath = "\(lprojPath)/Localizable.strings"
+        guard let dict = NSDictionary(contentsOfFile: filePath) as? [String: String] else {
+            return nil
+        }
+        let key = dict.filter { (key: String, value: String) in
+            return value == self
+        }.first?.key
+        return key
+    }
+    
 }

@@ -10,6 +10,7 @@ import CocoaLumberjack
 enum Business:String {
     case Debug
     case HTTP
+    case DB
     case Search
 }
 

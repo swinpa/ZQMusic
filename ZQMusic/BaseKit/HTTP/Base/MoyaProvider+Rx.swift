@@ -1,13 +1,26 @@
 //
 //  MoyaProvider+RxSwift.swift
-//  FZChat
+//  ZQMusic
 //
-//  Created by wp on 2023/1/27.
+//  Created by wp on 9/29/23.
 //
 
 @_exported import RxSwift
 import Moya
 
+
+extension Dictionary {
+    func toJSON()-> Any {
+        
+        do {
+            guard let data = self.toJsonstring().data(using: .utf8) else { return self }
+            return try JSONSerialization.jsonObject(with: data, options: .allowFragments)
+        } catch {
+            return self
+        }
+        
+    }
+}
 
 public extension Reactive where Base: MoyaProvider<MultiTarget> {
     
@@ -20,13 +33,15 @@ public extension Reactive where Base: MoyaProvider<MultiTarget> {
     ///   - api: Request body
     ///   - callbackQueue: Callback queue. If nil - queue from provider initializer will be used.
     /// - Returns: Observable sequence JSON object. May be thrown twice.
-    func request<T:Codable>(target: FZTargetType, callbackQueue: DispatchQueue? = nil) -> RxSwift.Observable<T> {
+    func request<T:Codable>(target: ZQMTargetType, callbackQueue: DispatchQueue? = nil) -> RxSwift.Observable<T> {
         var single: RxSwift.Observable<T> = RxSwift.Observable<T>.create { (observer) in
             // And then process network data
             let token = self.request(target, base: base, queue: callbackQueue) { json in
                 
                 Logger.debug(.HTTP, message: "++++++++++++++++++++++response++++++++++++++++++++++++")
                 Logger.debug(.HTTP, message: "url:\(target.baseURL.absoluteString + target.path)")
+                Logger.debug(.HTTP, message: "headers:\n\(target.headers ?? [:])")
+                Logger.debug(.HTTP, message: "parameters:\n\(target.parameters.toJSON())")
                 Logger.debug(.HTTP, message: "content:\n\(json)")
                 Logger.debug(.HTTP, message: "++++++++++++++++++++++end++++++++++++++++++++++++")
                 
@@ -61,7 +76,7 @@ public extension Reactive where Base: MoyaProvider<MultiTarget> {
     
     
     @discardableResult
-    func request(_ target: FZTargetType,
+    func request(_ target: ZQMTargetType,
                              base: MoyaProvider<MultiTarget>,
                              queue: DispatchQueue?,
                              success:@escaping SuccessBlock,

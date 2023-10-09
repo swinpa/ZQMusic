@@ -1,8 +1,8 @@
 //
 //  Service+Config.swift
-//  FZChat
+//  ZQMusic
 //
-//  Created by wp on 2023/1/15.
+//  Created by wp on 9/29/23.
 //
 
 import Foundation
@@ -10,11 +10,11 @@ import Moya
 
 extension Service {
     enum Home {
-        case search(keyword: String, country: String = DeviceInfo.countryCode, language: String = DeviceInfo.languageCode, limit: Int = 20)
+        case search(keyword: String, entity:String, country: String = DeviceInfo.countryCode, language: String = DeviceInfo.languageCode, offset:Int = 0, limit: Int = 20)
     }
 }
 
-extension Service.Home: FZTargetType {
+extension Service.Home: ZQMTargetType {
     //https://itunes.apple.com/search?term=jack+johnson&limit=100&offset=300
     var baseURL: URL {
         return URL.init(string: "https://itunes.apple.com")!
@@ -22,12 +22,15 @@ extension Service.Home: FZTargetType {
     
     var parameters: [String: Any] {
         switch self {
-        case .search(let keyword, let country, let language, let limit):
+        case .search(let keyword, let entity, let country, let language, let offset, let limit):
             return [
                 "term":keyword,
+                "media":"music",
+                "entity":entity,
                 "country":country,
                 "language":language,
                 "limit":limit,
+                "offset":offset,
             ]
         }
     }
@@ -51,7 +54,7 @@ extension Service.Home: FZTargetType {
     }
     public var task: Task {
         switch self {
-        case .search(_,_,_,_):
+        case .search(_,_,_,_,_,_):
             return .requestParameters(parameters: self.parameters, encoding: URLEncoding.queryString)
         }
     }

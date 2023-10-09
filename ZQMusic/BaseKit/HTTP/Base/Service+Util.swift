@@ -1,8 +1,8 @@
 //
 //  Service+Util.swift
-//  FZChat
+//  ZQMusic
 //
-//  Created by wp on 2023/1/27.
+//  Created by wp on 9/29/23.
 //
 
 import Foundation
@@ -17,7 +17,7 @@ extension Service {
     struct Util {
         
         @discardableResult
-        static func request(_ target: FZTargetType,
+        static func request(_ target: ZQMTargetType,
                                  base: MoyaProvider<MultiTarget>,
                                  queue: DispatchQueue?,
                                  success:@escaping SuccessBlock,
