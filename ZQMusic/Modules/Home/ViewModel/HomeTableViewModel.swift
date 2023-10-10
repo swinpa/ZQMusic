@@ -60,6 +60,7 @@ class RowViewModel: TableRowViewModelProtocol{
                                                     isFavorite: cell.favoritesButton.isSelected)
             
         }).disposed(by: self.disposeBag!)
+        
         ZQCoreDataManager.shared.getFavoriteStatus(self.data) { isFavorite in
             if cell.Id == self.Id {
                 cell.favoritesButton.isSelected = isFavorite

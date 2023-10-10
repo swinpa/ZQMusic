@@ -176,9 +176,6 @@
 				F7712C4C2ACA6EDC00C2B699 /* Extension */,
 				F7712C2A2AC7BE2300C2B699 /* Device */,
 				F7712BFF2AC65AD100C2B699 /* HTTP */,
-				F7712B972AC5E98B00C2B699 /* RXSwiftExtension */,
-				F7712BA62AC5E98B00C2B699 /* UIFoundationExtension */,
-				F7712BAF2AC5E98B00C2B699 /* UIKitExtension */,
 				F7712BBC2AC5E98B00C2B699 /* Logger */,
 			);
 			path = BaseKit;
@@ -362,6 +359,9 @@
 		F7712C4C2ACA6EDC00C2B699 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				F7712B972AC5E98B00C2B699 /* RXSwiftExtension */,
+				F7712BA62AC5E98B00C2B699 /* UIFoundationExtension */,
+				F7712BAF2AC5E98B00C2B699 /* UIKitExtension */,
 				F7712C4D2ACA6EDC00C2B699 /* TableView */,
 			);
 			path = Extension;
